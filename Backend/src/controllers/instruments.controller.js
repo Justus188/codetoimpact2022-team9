@@ -9,6 +9,7 @@ export default class RestaurantsController {
             console.log(err.stack)
             // res.json()
         }
+        console.log(results.rows[0])
         res.status(200).json(results.rows)
     }
 
@@ -22,7 +23,7 @@ export default class RestaurantsController {
             console.log(err.stack)
             // res.json()
         }
-
+        console.log(results.rows[0])
         res.status(200).json(results.rows)
     }
 
@@ -36,7 +37,7 @@ export default class RestaurantsController {
             console.log(err.stack)
             // res.json()
         }
-
+        console.log(results.rows[0])
         res.status(200).json(results.rows)
     }
 
@@ -50,6 +51,7 @@ export default class RestaurantsController {
             console.log(err.stack)
             // res.json()
         }
+        console.log(results.rows[0])
         res.status(200).json(results.rows)
     }
 
@@ -63,6 +65,7 @@ export default class RestaurantsController {
             console.log(err.stack)
             // res.json()
         }
+        console.log(results.rows[0])
         res.status(200).json(results.rows)
     }
 
@@ -76,6 +79,7 @@ export default class RestaurantsController {
             console.log(err.stack)
             // res.json()
         }
+        console.log(results.rows[0])
         res.status(200).json(results.rows)
     }
 
@@ -89,6 +93,7 @@ export default class RestaurantsController {
             console.log(err.stack)
             // res.json()
         }
+        console.log(results.rows[0])
         res.status(200).json(results.rows)
     }
 
@@ -102,6 +107,7 @@ export default class RestaurantsController {
             console.log(err.stack)
             // res.json()
         }
+        console.log(results.rows[0])
         res.status(200).json(results.rows)
     }
 
@@ -115,6 +121,7 @@ export default class RestaurantsController {
             console.log(err.stack)
             // res.json()
         }
+        console.log(results.rows[0])
         res.status(200).json(results.rows)
     }
 
@@ -128,6 +135,7 @@ export default class RestaurantsController {
             console.log(err.stack)
             // res.json()
         }
+        console.log(results.rows[0])
         res.status(200).json(results.rows)
     }
 
@@ -141,6 +149,7 @@ export default class RestaurantsController {
             console.log(err.stack)
             // res.json()
         }
+        console.log(results.rows[0])
         res.status(200).json(results.rows)
     }
 }
