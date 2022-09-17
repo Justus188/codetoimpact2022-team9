@@ -20,10 +20,6 @@ global.pool = new pg.Pool({
     port: process.env.POSTGRES_PORT
 })
 
-//console.log(pool.query("SELECT * FROM instruments", (err, res) =>{
-//    console.log(err, res)
-//}))
-
 const app = express()
 const port = process.env.PORT || 5001
 
@@ -39,7 +35,6 @@ app.use(function(req, res, next) {
 
 app.get('/', (request, response) => {response.json({info: 'Node.js, Express, Postgres API'})})
 
-//app.use('/test', tests)
 app.use('/dev', devtools)
 app.use('/api/instruments', instruments)
 app.use('/api/market-values', valuations)
