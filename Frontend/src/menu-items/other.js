@@ -19,6 +19,14 @@ const other = {
             breadcrumbs: false
         },
         {
+            id:'instruments-page',
+            title: 'Instruments',
+            type: 'item',
+            url: '/instruments-page',
+            icon: icons.IconBrandChrome,
+            breadcrumbs: false
+        },
+        {
             id: 'documentation',
             title: 'Documentation',
             type: 'item',
