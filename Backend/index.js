@@ -11,7 +11,7 @@ import valuations from './src/routes/valuations.route.js'
 
 dotenv.config()
 
-let pool = new pg.Pool({
+global.pool = new pg.Pool({
     user: process.env.POSTGRES_USER,
     host: process.env.POSTGRES_HOST,
     database: process.env.POSTGRES_DATABASE,

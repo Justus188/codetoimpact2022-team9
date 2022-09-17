@@ -2,43 +2,35 @@ import pg from 'pg'
 
 export default class InstrumentsController {
     static async GetInstrumentsSummary(req, res, next){
-        var pool = new pg.Pool({
-            user: process.env.POSTGRES_USER,
-            host: process.env.POSTGRES_HOST,
-            database: process.env.POSTGRES_DATABASE,
-            password: process.env.POSTGRES_PASSWORD,
-            port: process.env.POSTGRES_PORT
-        })
-
-        let query = "SELECT * FROM instruments WHERE isDeleted = false" // DECIDE ON COLUMNS!!
+        let query = "SELECT * FROM instruments" // WHERE isDeleted = false" // DECIDE ON COLUMNS!!
         try {
             const results = await pool.query(query)
+            console.log(results)
+            res.status(200).json(results.rows)
         } catch (err) {
             console.log(err.stack)
-            // res.json()
+            res.status(500)
         }
-
-        //console.log(results.rows[0])
-        //res.status(200).json(results.rows)
-        res.status(200).json({
-            instrumendId: 1,
-            instrumentName: "Paragon Inc",
-            instrumentType: "Private Equity",
-            country: "US",
-            sector: "Technology",
-            instrumentCurrency: "USD",
-            isTradeable: true,
-            createdAt: Date(),
-            modifiedAt: Date()
-        })
+        
+        //res.status(200).json({
+        //    instrumendId: 1,
+        //    instrumentName: "Paragon Inc",
+        //    instrumentType: "Private Equity",
+        //    country: "US",
+        //    sector: "Technology",
+        //    instrumentCurrency: "USD",
+        //    isTradeable: true,
+        //    createdAt: Date(),
+        //    modifiedAt: Date()
+        //})
     }
 
-    static async AddInstrument(req, res, next){
+    static async AddInstrument(req, res, next){ // TO TEST AFTER CONSTRAINT RELAXATION
         
         let query = "INSERT INTO instruments (instrumentName, country, sector, instrumentType, instrumentCurrency, isTradeable, notes) VALUES ($1, $2, $3, $4, $5, $6, $7)"
-
+        
         // check if previously deleted
-
+        
         //try {
         //    let params = [req.body.instrumentName, req.body.country, req.body.sector, req.body.instrumentType, req.body.instrumentCurrency, req.body.isTradeable, req.body.notes || null]
         //    const results = await pool.query(query, params)
@@ -54,29 +46,17 @@ export default class InstrumentsController {
     static async GetInstrumentById(req, res, next){
         let id = req.params.id
         let params = [req.params.id]
-        let query = "SELECT * FROM instruments WHERE instrumentId = $1 AND isDeleted = false" // DECIDE ON COLUMNS!!
-        //try {
-        //    const results = await pool.query(query, params)
-        //} catch (err) {
-        //    console.log(err.stack)
-            // res.json()
-        //}
-        //console.log(results.rows[0])
-        //res.status(200).json(results.rows)
-        res.status(200).json({
-            instrumendId: 1,
-            instrumentName: "Paragon Inc",
-            instrumentType: "Private Equity",
-            country: "US",
-            sector: "Technology",
-            instrumentCurrency: "USD",
-            isTradeable: true,
-            createdAt: Date(),
-            modifiedAt: Date()
-        })
+        let query = "SELECT * FROM instruments WHERE instrument_id = $1"// AND isDeleted = false" // DECIDE ON COLUMNS!!
+        try {
+            const results = await pool.query(query, params)
+            res.status(200).json(results.rows)
+        } catch (err) {
+            console.log(err.stack)
+            res.status(500)
+        }
     }
 
-    static async EditInstrument(req, res, next){
+    static async EditInstrument(req, res, next){ // TO TEST AFTER CONSTRAINT RELAXATION
         let id = req.params.id
 
         //try {
@@ -86,31 +66,19 @@ export default class InstrumentsController {
             //res.json()
         //}
 
-        //let query = "UPDATE instruments SET instrumentName = $1, country = $2, sector = $3, instrumentType = $4, instrumentCurrency = $5, isTradeable = $6, notes = COALESCE($7, notes)) WHERE instrumentId = $7"
+        //let query = "UPDATE instruments SET instrument_name = $1, country = $2, sector = $3, instrument_type = $4, currency = $5, isTradeable = $6, notes = COALESCE($7, notes) WHERE instrument_id = $8"
         //try {
-        //    let params = [req.body.instrumentName, req.body.country, req.body.sector, req.body.instrumentType, req.body.instrumentCurrency, req.body.isTradeable, req.body.notes || null]
+        //    console.log(req.body.notes)
+        //    let params = [req.body.instrumentName, req.body.country, req.body.sector, req.body.instrumentType, req.body.instrumentCurrency, req.body.isTradeable, req.body.notes || null, id]
         //    const results = await pool.query(query, params)
+        //    res.status(200).json(results.rows)
         //} catch (err) {
         //    console.log(err.stack)
             // res.json()
         //}
-        //console.log(results.rows[0])
-        //res.status(200).json(results.rows)
-        res.status(200).json({
-            instrumendId: 1,
-            instrumentName: req.body.instrumentName,
-            instrumentType: req.body.instrumentType,
-            country: req.body.country,
-            sector: req.body.sector,
-            instrumentCurrency: req.body.instrumentCurrency,
-            isTradeable: req.body.isTradeable,
-            createdAt: Date(),
-            modifiedAt: Date(),
-            notes: req.body.notes || null
-        })
     }
 
-    static async SoftDeleteInstrument(req, res, next){
+    static async SoftDeleteInstrument(req, res, next){ // TO TEST AFTER isDeleted
         let id = req.params.id
         let params = [req.params.id]
         let query = "UPDATE instruments SET isDeleted = true WHERE instrumentId = $1"// update a softdeleted column
@@ -128,59 +96,46 @@ export default class InstrumentsController {
     static async GetCreated(req, res, next){
         let id = req.params.id
         let params = [req.params.id]
-        let query = "SELECT createdAt FROM instruments WHERE instrumentId = $1"
-        //try {
-        //    const results = await pool.query(query, params)
-        //} catch (err) {
-        //    console.log(err.stack)
+        let query = "SELECT created_time FROM instruments WHERE instrument_id = $1"
+        try {
+            const results = await pool.query(query, params)
+            res.status(200).json(results.rows)
+        } catch (err) {
+            console.log(err.stack)
             // res.json()
-        //}
-        //console.log(results.rows[0])
-        //res.status(200).json(results.rows)
-        res.status(200).json({createdAt: Date()})
+        }
     }
 
     static async GetModified(req, res, next){
         let id = req.params.id
         let params = [req.params.id]
-        let query = "SELECT modifiedAt FROM instruments WHERE instrumentId = $1"
-        //try {
-        //    const results = await pool.query(query, params)
-        //} catch (err) {
-        //    console.log(err.stack)
+        let query = "SELECT modified_time FROM instruments WHERE instrument_id = $1"
+        try {
+            const results = await pool.query(query, params)
+            res.status(200).json(results.rows)
+        } catch (err) {
+            console.log(err.stack)
             // res.json()
-        //}
-        //console.log(results.rows[0])
-        //res.status(200).json(results.rows)
-        res.status(200).json({createdAt: Date()})
+        }
     }
 
     static async EditTradeable(req, res, next){
         let id = req.params.id
         let params = [req.params.id]
-        let query = "UPDATE instruments SET isTradeable = NOT isTradeable WHERE instrumentId = $1"// update a softdeleted column
-        //try {
-        //    const results = await pool.query(query, params)
-        //} catch (err) {
-        //    console.log(err.stack)
+        let query = "UPDATE instruments SET isTradeable = NOT isTradeable WHERE instrument_id = $1"// update a softdeleted column
+        try {
+            const results = await pool.query(query, params)
+            res.status(200).json(results.rows)
+            console.log(results.rows[0])
+        } catch (err) {
+            console.log(err.stack)
             // res.json()
-        //}
-        //console.log(results.rows[0])
-        //res.status(200).json(results.rows)
-        res.status(200).json({
-            instrumendId: req.params.id,
-            instrumentName: "Paragon Inc",
-            instrumentType: "Private Equity",
-            country: "US",
-            sector: "Technology",
-            instrumentCurrency: "USD",
-            isTradeable: true,
-            createdAt: Date(),
-            modifiedAt: Date()
-        })
+        }
+        
+        
     }
 
-    static async EditCountry(req, res, next){
+    static async EditCountry(req, res, next){ // TO TEST
         let id = req.params.id
         let params = [req.body.country, req.params.id]
         let query = "UPDATE instruments SET country = $1 WHERE instrumentId = $2"// update a softdeleted column
