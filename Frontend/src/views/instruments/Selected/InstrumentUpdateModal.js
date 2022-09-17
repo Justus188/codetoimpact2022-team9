@@ -7,6 +7,7 @@ import { useTheme } from '@mui/material/styles';
 import {
     Box,
     Button,
+    Switch,
     Checkbox,
     Divider,
     FormControl,
@@ -59,11 +60,9 @@ const InstrumentUpdateModal = ({ instrumentMetaData, handleClose, ...others }) =
         event.preventDefault();
     };
 
-
-
     return (
         <Box sx={{ backgroundColor: 'grey[700]', width: '75%' }}>
-            <Box sx={{ backgroundColor: '#FFFFFF', borderRadius: 6 }} p={5}>
+            <Box sx={{ backgroundColor: '#FFFFFF', borderRadius: 4 }} p={5}>
                 <Formik
                     initialValues={{
                         // email: '',
@@ -93,7 +92,7 @@ const InstrumentUpdateModal = ({ instrumentMetaData, handleClose, ...others }) =
                 >
                     {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
                         <form noValidate onSubmit={handleSubmit} {...others}>
-                            <Grid container>
+                            <Grid container spacing={matchDownSM ? 0 : 2}>
                                 <Grid item xs={12}>
                                     <TextField
                                         fullWidth
@@ -105,8 +104,6 @@ const InstrumentUpdateModal = ({ instrumentMetaData, handleClose, ...others }) =
                                         sx={{ ...theme.typography.customInput }}
                                     />
                                 </Grid>
-                            </Grid>
-                            <Grid container spacing={matchDownSM ? 0 : 2}>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                         fullWidth
@@ -129,7 +126,35 @@ const InstrumentUpdateModal = ({ instrumentMetaData, handleClose, ...others }) =
                                         sx={{ ...theme.typography.customInput }}
                                     />
                                 </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        fullWidth
+                                        label="Notes"
+                                        margin="normal"
+                                        name="notes"
+                                        type="outlined-textarea"
+                                        defaultValue={values.notes}
+                                        sx={{ ...theme.typography.customInput }}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1}}>
+                                        <FormControlLabel
+                                            control={<Switch
+                                                name="isTradeable"
+                                                value={values.isTradeable}
+                                                onChange={() => {
+                                                    values.isTradeable = !values.isTradeable;
+                                                    // console.log(values);
+                                                }}
+                                            />}
+                                            label="Tradeable"
+                                            labelPlacement="start"
+                                        />
+                                    </Box>
+                                </Grid>
                             </Grid>
+
                             {/* <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
                                 <InputLabel htmlFor="outlined-adornment-email-register">Email Address / Username</InputLabel>
                                 <OutlinedInput

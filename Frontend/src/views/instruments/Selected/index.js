@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 // material-ui
 import { Grid, Modal } from '@mui/material';
@@ -15,7 +16,7 @@ import TotalIncomeLightCard from './TotalIncomeLightCard';
 import TotalGrowthBarChart from './TotalGrowthBarChart';
 import { gridSpacing } from 'store/constant';
 
-// Mock data import 
+// TODO: Mock data import 
 import { mockInstrumentMetaData } from './chart-data/mock_instrument_meta_data';
 import { mockInstrumentChartData } from './chart-data/mock_instrument_chart_data';
 
@@ -42,6 +43,19 @@ const Dashboard = () => {
         setEditing(false);
     };
 
+    // const getSelectedInstrumentData = () => {
+    //     const endPoint = `http://localhost:5001/api/instruments/1`
+    //     axios.get(endPoint)
+    //     .then(response => {
+    //         console.log(response.data);
+    //         return response
+    //     }, error => {
+    //         console.log(error);
+    //     });
+    // };
+
+    // const mockInstrumentMetaData = getSelectedInstrumentData(); {/* TODO: */}
+
     const {
         instrumentName,
         instrumentType,
@@ -56,7 +70,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <Modal 
+            <Modal
                 open={isEditing}
                 sx={{
                     display: 'flex',
