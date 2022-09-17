@@ -1,4 +1,11 @@
+import Ajv from 'ajv'
+const ajv = new Ajv()
+
 export default class InstrumentsController {
+    static async Test(req, res, next){
+        res.json("Hello World")
+    }
+
     static async GetInstrumentsSummary(req, res, next){
         let query = "SELECT * FROM instruments"//WHERE isDeleted = false" // DECIDE ON COLUMNS!!
         try {
@@ -41,6 +48,16 @@ export default class InstrumentsController {
     }
 
     static async EditInstrument(req, res, next){
+        const ValidateInput = ajv.compile({
+            "type": "object",
+            "required": ["instrument_name", "country", "sector", "instrument_type", "currency", "isTradeable"],
+        })
+        const validInput = ValidateInput(req)
+        if (!validInput) {
+            res.status(422).json("Missing required fields.")
+            return
+        }
+
         let id = req.params.id
 
         //try {
@@ -117,15 +134,24 @@ export default class InstrumentsController {
     }
 
     static async EditCountry(req, res, next){ // TO TEST AFTER RELAXATIN
+        console.log("1")
         let id = req.params.id
+        console.log("2")
         let params = [req.body.country, req.params.id]
+        console.log("3")
         let query = "UPDATE instruments SET country = $1 WHERE instrument_id = $2"// update a softdeleted column
+        console.log("4")
         try {
+            console.log("5")
             const results = await pool.query(query, params)
-            const check = await pool.query()
+            console.log("6")
             res.status(200).json(results.rows)
+            console.log("7")
         } catch (err) {
+            console.log("error caught")
+            console.log(pool.query("SELECT * FROM instruments WHERE instrument_id = $1", params))
             console.log(err.stack)
+            res.status(500).json(err)
             // res.json()
         }        
     }
@@ -133,7 +159,7 @@ export default class InstrumentsController {
     static async EditSector(req, res, next){ // TO TEST AFTER RELAXATION
         let id = req.params.id
         let params = [req.body.sector, req.params.id]
-        let query = "SELECT * FROM instruments"
+        let query = "UPDATE instruments SET sector = $1 WHERE instrument_id = $2"// update a softdeleted column
         try {
             const results = await pool.query(query, params)
             res.status(200).json(results.rows)
