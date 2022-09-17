@@ -1,6 +1,7 @@
 // import React from "react";
 // import "./index.css";
 import { dummyInstrumentData } from "./DummyInstrumentData";
+import {getInstrumentsAsyn} from "../../../store/Instrument";
 
 import * as React from 'react';
 import Table from '@mui/material/Table';
@@ -39,10 +40,29 @@ export const Instruments = () => {
   );
 };
 
+
+
+const instrument =  async () => {
+    const resp = await fetch(`http://localhost:5001/api/instruments/1`, {
+      method: 'GET',
+    });
+    if (resp.ok) {
+      const instruments = await resp.json();
+      console.log(instruments)
+      return { instruments };
+    }
+  };
+
+
+const result = instrument();
+
+console.log(result);
+
 const HomePageHeader = () => {
   return (
     <header className="header">
       <h2>Your instrument Tracker</h2>
+
     </header>
   );
 };
