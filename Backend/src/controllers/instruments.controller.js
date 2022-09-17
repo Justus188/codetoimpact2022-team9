@@ -58,7 +58,7 @@ export default class RestaurantsController {
     static async SoftDeleteInstrument(req, res, next){
         let id = req.params.id
         let params = [req.params.id]
-        let query = "UPDATE instruments SET isDeleted = 1 WHERE instrumentId = $1"// update a softdeleted column
+        let query = "UPDATE instruments SET isDeleted = true WHERE instrumentId = $1"// update a softdeleted column
         try {
             const results = await pool.query(query, params)
         } catch (err) {
