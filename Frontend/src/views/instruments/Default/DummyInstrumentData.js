@@ -6,7 +6,7 @@ export const dummyInstrumentData = [
       "sector": "Consumer Staples",
       "country": "US",
       "instrumentCurrency": "USD",
-      "isTradeable": true,
+      "isTradeable": false,
       "createdAt": "2019-02-01 00:00:00",
       "modifiedAt": "2019-02-01 00:00:00",
       "notes": "Private Equity; Consumer Staples; Tradable Instrument"
