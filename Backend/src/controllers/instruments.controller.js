@@ -11,18 +11,6 @@ export default class InstrumentsController {
             console.log(err.stack)
             res.status(500)
         }
-        
-        //res.status(200).json({
-        //    instrumendId: 1,
-        //    instrumentName: "Paragon Inc",
-        //    instrumentType: "Private Equity",
-        //    country: "US",
-        //    sector: "Technology",
-        //    instrumentCurrency: "USD",
-        //    isTradeable: true,
-        //    createdAt: Date(),
-        //    modifiedAt: Date()
-        //})
     }
 
     static async AddInstrument(req, res, next){ // TO TEST AFTER CONSTRAINT RELAXATION
@@ -66,16 +54,16 @@ export default class InstrumentsController {
             //res.json()
         //}
 
-        //let query = "UPDATE instruments SET instrument_name = $1, country = $2, sector = $3, instrument_type = $4, currency = $5, isTradeable = $6, notes = COALESCE($7, notes) WHERE instrument_id = $8"
-        //try {
-        //    console.log(req.body.notes)
-        //    let params = [req.body.instrumentName, req.body.country, req.body.sector, req.body.instrumentType, req.body.instrumentCurrency, req.body.isTradeable, req.body.notes || null, id]
-        //    const results = await pool.query(query, params)
-        //    res.status(200).json(results.rows)
-        //} catch (err) {
-        //    console.log(err.stack)
+        let query = "UPDATE instruments SET instrument_name = $1, country = $2, sector = $3, instrument_type = $4, currency = $5, isTradeable = $6, notes = COALESCE($7, notes) WHERE instrument_id = $8"
+        try {
+            console.log(req.body.notes)
+            let params = [req.body.instrumentName, req.body.country, req.body.sector, req.body.instrumentType, req.body.instrumentCurrency, req.body.isTradeable, req.body.notes || null, id]
+            const results = await pool.query(query, params)
+            res.status(200).json(results.rows)
+        } catch (err) {
+            console.log(err.stack)
             // res.json()
-        //}
+        }
     }
 
     static async SoftDeleteInstrument(req, res, next){ // TO TEST AFTER isDeleted
@@ -126,7 +114,6 @@ export default class InstrumentsController {
         try {
             const results = await pool.query(query, params)
             res.status(200).json(results.rows)
-            console.log(results.rows[0])
         } catch (err) {
             console.log(err.stack)
             // res.json()
@@ -135,79 +122,42 @@ export default class InstrumentsController {
         
     }
 
-    static async EditCountry(req, res, next){ // TO TEST
+    static async EditCountry(req, res, next){ // TO TEST AFTER RELAXATIN
         let id = req.params.id
         let params = [req.body.country, req.params.id]
-        let query = "UPDATE instruments SET country = $1 WHERE instrumentId = $2"// update a softdeleted column
-        //try {
-        //    const results = await pool.query(query, params)
-        //} catch (err) {
-        //    console.log(err.stack)
+        let query = "UPDATE instruments SET country = $1 WHERE instrument_id = $2"// update a softdeleted column
+        try {
+            const results = await pool.query(query, params)
+            const check = await pool.query()
+            res.status(200).json(results.rows)
+        } catch (err) {
+            console.log(err.stack)
             // res.json()
-        //}
-        //console.log(results.rows[0])
-        //res.status(200).json(results.rows)
-        res.status(200).json({
-            instrumendId: req.params.id,
-            instrumentName: "Paragon Inc",
-            instrumentType: "Private Equity",
-            country: req.body.country,
-            sector: "Technology",
-            instrumentCurrency: "USD",
-            isTradeable: true,
-            createdAt: Date(),
-            modifiedAt: Date()
-        })
+        }        
     }
 
-    static async EditSector(req, res, next){
+    static async EditSector(req, res, next){ // TO TEST AFTER RELAXATION
         let id = req.params.id
         let params = [req.body.sector, req.params.id]
-        let query = "UPDATE instruments SET sector = $1 WHERE instrumentId = $2"// update a softdeleted column
-        //try {
-        //    const results = await pool.query(query, params)
-        //} catch (err) {
-        //    console.log(err.stack)
+        let query = "UPDATE instruments SET sector = $1 WHERE instrument_id = $2"// update a softdeleted column
+        try {
+            const results = await pool.query(query, params)
+            res.status(200).json(results.rows)
+        } catch (err) {
+            console.log(err.stack)
             // res.json()
-        //}
-        //console.log(results.rows[0])
-        //res.status(200).json(results.rows)
-        res.status(200).json({
-            instrumendId: req.params.id,
-            instrumentName: "Paragon Inc",
-            instrumentType: "Private Equity",
-            country: "US",
-            sector: req.body.sector,
-            instrumentCurrency: "USD",
-            isTradeable: true,
-            createdAt: Date(),
-            modifiedAt: Date()
-        })
+        }
     }
 
     static async EditNotes(req, res, next){
         let id = req.params.id
         let params = [req.body.notes, req.params.id]
-        let query = "UPDATE instruments SET notes = $1 WHERE instrumentId = $2"// update a softdeleted column
-        //try {
-        //    const results = await pool.query(query, params)
-        //} catch (err) {
-        //    console.log(err.stack)
-            // res.json()
-        //}
-        //console.log(results.rows[0])
-        //res.status(200).json(results.rows)
-        res.status(200).json({
-            instrumendId: req.params.id,
-            instrumentName: "Paragon Inc",
-            instrumentType: "Private Equity",
-            country: "US",
-            sector: "Technology",
-            instrumentCurrency: "USD",
-            isTradeable: true,
-            createdAt: Date(),
-            modifiedAt: Date(),
-            notes: req.body.note
-        })
+        let query = "UPDATE instruments SET notes = $1 WHERE instrument_id = $2"// update a softdeleted column
+        try {
+            const results = await pool.query(query, params)
+            res.status(200).json()
+        } catch (err) {
+            console.log(err.stack)
+        }        
     }
 }
