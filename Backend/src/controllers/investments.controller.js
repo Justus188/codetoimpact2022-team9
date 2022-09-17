@@ -13,7 +13,7 @@ export default class InvestmentsCtrl {
         try {
             const results = await pool.query(query, params)
             if (results.rowCount == 0) {
-                res.status(204).json("No rows returned")
+                res.status(204).json(results.rows)
             } else{
                 res.status(200).json(results.rows)
             }

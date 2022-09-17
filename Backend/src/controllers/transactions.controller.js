@@ -89,7 +89,7 @@ export default class TransactionsCtrl {
     console.log('---> AddTransaction end');
   }
 
-  static async DeleteTransaction(req, res, next) {
+  static async CancelTransaction(req, res, next) {
     console.log('---> CancelTransaction start');
     let transactionId = req.params.id;
     let params = [transactionId];
