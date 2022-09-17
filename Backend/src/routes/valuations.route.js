@@ -7,5 +7,6 @@ const router = express.Router()
 router.route("/:id")
     .get(ValuationsCtrl.GetMarketValues)
     .post(ValuationsCtrl.AddMarketValues)
+    .put(ValuationsCtrl.EditMarketValues)
 
 export default router
