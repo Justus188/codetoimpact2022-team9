@@ -4,6 +4,7 @@ import InstrumentsCtrl from "../controllers/instruments.controller.js" // db con
 
 const router = express.Router()
 
+router.route("/").get(InstrumentsCtrl.GetInstrumentsSummary)
 router.route("/:id")
     .post(InstrumentsCtrl.AddInstrument)
     .get(InstrumentsCtrl.GetInstrumentById)

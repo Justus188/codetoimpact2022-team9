@@ -1,5 +1,10 @@
-//import RestaurantsDAO from "../dao/restaurantsDAO.js" // import database
+import pool from '../db/querypooler.js'
+
 export default class RestaurantsController {
+    static async GetInstrumentsSummary(req, res, next){
+        res.json({GetInstrumentsSummary: id})
+    }
+
     static async AddInstrument(req, res, next){
         let id = req.params.id
         res.json({AddInstrument: id})

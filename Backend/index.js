@@ -1,10 +1,13 @@
 import express from 'express'
 import bodyParser from 'body-parser'
+import dotenv from "dotenv"
 
 import instruments from './src/routes/instruments.route.js'
 //import valuations from './src/valuations.route.js'
 //import transactions from './src/transactions.route.js'
 //import investments from './src/investments.route.js'
+
+dotenv.config()
 
 const app = express()
 const port = process.env.PORT || 3000
