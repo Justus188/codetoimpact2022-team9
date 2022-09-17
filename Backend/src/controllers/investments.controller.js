@@ -22,32 +22,28 @@ export default class InvestmentsCtrl {
     }
 
     static async RefreshInvestmentById(req, res, next) {
-        console.log("---> RefreshInvestmentById start")
-        
-        let instrumentId = req.params.instrumentId
-        let params = [instrumentId]
-
-        // let ownedQty = "SELECT * FROM transactions where instrument_id = $1 AND isCancelled = 'false'"
-        // let sumQty = "SELECT SUM(quantity) as cum_qty, SUM(investment) AS cum_transaction FROM transactions where investment_id = $1 AND isCancelled = false AND buy"
-
-        // console.log(sumQty)
-
-        // let query = "INSERT INTO investment (instrumentId, cumulativeQuantity, cumulativeTransactionAmount, refreshDatetime) VALUES (1, 1212, 12312312, CURRENT_TIMESTAMP(0))"
-        // let query = "INSERT INTO investment (instrumentId, cumulativeQuantity, cumulativeTransactionAmount, refreshDatetime) VALUES (1, 1212, 12312312, CURRENT_TIMESTAMP(0))"
-        // let sumQty = "SELECT SUM(quantity) as cum_qty, SUM(transactionAmount) AS cum_transaction FROM transactions where investment_id = $1 AND isCancelled = false AND 'BUY'"
-        let sumQty = "SELECT SUM(quantity) FROM transactions where instrument_id = $1 AND isCancelled = false AND transaction_type = 'BUY'"
-        
-        
+        let buy, sell
+        try {    
+            let params = [req.params.instrumentId]
+            let query = "SELECT SUM(quantity) AS cumulativequantity, SUM(transaction_amount) AS cumulativetransactionamount FROM transactions WHERE instrument_id = $1 AND isCancelled = false"
+            buy = await pool.query(query + " AND transaction_type = 'BUY'", params)
+            sell = await pool.query(query + " AND transaction_type = 'SELL'", params)
+        } catch(err){
+            console.log(err.stack)
+            res.status(500).json("Error with transactions")
+        }
         try {
-            const results = await pool.query(sumQty, params)
-            res.status(200).json(results.rows)
-
-            console.log(sumQty)
+            let query = "INSERT INTO investment (cumulativequantity, cumulativetransactionamount) VALUES ($1, $2) RETURNING investmentid"
+            let params = [buy.cumulativequantity - sell.cumulativequantity, buy.cumulativetransactionamount - sell.cumulativetransactionamount]
+            let results = await pool.query(query, params)
+            if (results.rowCount == 0){
+                res.status(500).json("Insert failed.")
+            } else {
+                res.status(200).json("Updated ID: " + (results.rows[0].investmentid).toString())
+            }
         } catch (err) {
             console.log(err.stack)
-            res.status(500)
+            res.status(500).json("Error with investments")
         }
-        
-        console.log("---> RefreshInvestmentById end")
     }
 }
