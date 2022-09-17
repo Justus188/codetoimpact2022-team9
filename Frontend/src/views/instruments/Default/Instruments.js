@@ -11,6 +11,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { useEffect } from "react";
 
 export const Instruments = () => {
   return (
@@ -42,21 +43,10 @@ export const Instruments = () => {
 
 
 
-const instrument =  async () => {
-    const resp = await fetch(`http://localhost:5001/api/instruments/1`, {
-      method: 'GET',
-    });
-    if (resp.ok) {
-      const instruments = await resp.json();
-      console.log(instruments)
-      return { instruments };
-    }
-  };
 
 
-const result = instrument();
-
-console.log(result);
+// console.log(result);
+// console.log(dummyInstrumentData)
 
 const HomePageHeader = () => {
   return (
@@ -68,6 +58,20 @@ const HomePageHeader = () => {
 };
 
 export default function DenseTable() {
+
+        const instrument =  async () => {
+            const resp = await fetch(`http://localhost:5001/api/instruments`, {
+              method: 'GET',
+            });
+            if (resp.ok) {
+              const instruments = await resp.json();
+              console.log(instruments)
+              return { instruments };
+            }
+          };
+        
+        const result = instrument();
+    useEffect(()=>{
     return (
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -84,9 +88,10 @@ export default function DenseTable() {
               <TableCell align="right">modifiedAt</TableCell>
               <TableCell align="right">notes</TableCell>
             </TableRow>
-          </TableHead>
+          </TableHead> 
+          {result.length > 0}
           <TableBody>
-            {dummyInstrumentData.map((data) => (
+            {result.map((data) => (
               <TableRow
                 // key={key}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -94,62 +99,20 @@ export default function DenseTable() {
                 {/* <TableCell component="th" scope="row">
                   {key}
                 </TableCell> */}
-                <TableCell align="right">{data.instrumentId}</TableCell>
-                <TableCell align="right">{data.instrumentName}</TableCell>
-                <TableCell align="right">{data.instrumentType}</TableCell>
+                <TableCell align="right">{data.instrument_id}</TableCell>
+                <TableCell align="right">{data.instrument_name}</TableCell>
+                <TableCell align="right">{data.instrument_type}</TableCell>
                 <TableCell align="right">{data.sector}</TableCell>
                 <TableCell align="right">{data.country}</TableCell>
-                <TableCell align="right">{data.instrumentCurrency}</TableCell>
-                <TableCell align="right">{data.isTradeable.toString()}</TableCell>
-                <TableCell align="right">{data.createdAt}</TableCell>
-                <TableCell align="right">{data.modifiedAt}</TableCell>
+                <TableCell align="right">{data.currency}</TableCell>
+                <TableCell align="right">{data.istradeable.toString()}</TableCell>
+                <TableCell align="right">{data.created_time}</TableCell>
+                <TableCell align="right">{data.modified_time}</TableCell>
                 <TableCell align="right">{data.notes}</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-    );
+    )});
   }
-
-// const Instrument = ({ instrumentId, instrumentName, instrumentType, sector, country, instrumentCurrency, createdAt,  modifiedAt, notes, isTradeable }) => {
-//   if (!instrumentId) return <div />;
-//   return (
-//     <table>
-//       <tbody>
-//         <tr>
-//           <td>
-//             <h5>{instrumentId}</h5>
-//           </td>
-//           <td>
-//             <h5>{instrumentName}</h5>
-//           </td>
-//           <td>
-//             <h5>{instrumentType}</h5>
-//           </td>
-//           <td>
-//             <h5>{sector}</h5>
-//           </td>
-//           <td>
-//             <h5>{country}</h5>
-//           </td>
-//           <td>
-//             <h5>{instrumentCurrency}</h5>
-//           </td>
-//           <td>
-//             <h5>{createdAt}</h5>
-//           </td>
-//           <td>
-//             <h5>{modifiedAt}</h5>
-//           </td>
-//           <td>
-//             <h5>{notes}</h5>
-//           </td>
-//           <td>
-//             <p>{isTradeable}</p>
-//           </td>
-//         </tr>
-//       </tbody>
-//     </table>
-//   );
-// };

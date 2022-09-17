@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 node_modules
+=======
+/Frontend/node_modules
+/Backend/.env
+>>>>>>> refs/remotes/origin/main

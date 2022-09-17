@@ -5,7 +5,7 @@ import axios from 'axios';
 const getMockData = () => { axios.get('http://localhost:5001/api/instruments/1')
                   .then(response => {
                     console.log(response.data);
-                    return response
+                    return response.data
                   }, error => {
                     console.log(error);
                   });
