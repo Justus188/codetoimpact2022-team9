@@ -4,9 +4,10 @@ import InstrumentsCtrl from "../controllers/instruments.controller.js" // db con
 
 const router = express.Router()
 
-router.route("/").get(InstrumentsCtrl.GetInstrumentsSummary)
-router.route("/:id")
+router.route("/")
+    .get(InstrumentsCtrl.GetInstrumentsSummary)
     .post(InstrumentsCtrl.AddInstrument)
+router.route("/:id")
     .get(InstrumentsCtrl.GetInstrumentById)
     .put(InstrumentsCtrl.EditInstrument)
     .delete(InstrumentsCtrl.SoftDeleteInstrument)

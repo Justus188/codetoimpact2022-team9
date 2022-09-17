@@ -1,5 +1,3 @@
-import pg from 'pg'
-
 export default class InstrumentsController {
     static async GetInstrumentsSummary(req, res, next){
         let query = "SELECT * FROM instruments" // WHERE isDeleted = false" // DECIDE ON COLUMNS!!
@@ -15,20 +13,18 @@ export default class InstrumentsController {
 
     static async AddInstrument(req, res, next){ // TO TEST AFTER CONSTRAINT RELAXATION
         
-        let query = "INSERT INTO instruments (instrumentName, country, sector, instrumentType, instrumentCurrency, isTradeable, notes) VALUES ($1, $2, $3, $4, $5, $6, $7)"
+        let query = "INSERT INTO instruments (instrumentN_name, country, sector, instrument_type, currency, isTradeable, notes) VALUES ($1, $2, $3, $4, $5, $6, $7)"
         
         // check if previously deleted
         
-        //try {
-        //    let params = [req.body.instrumentName, req.body.country, req.body.sector, req.body.instrumentType, req.body.instrumentCurrency, req.body.isTradeable, req.body.notes || null]
-        //    const results = await pool.query(query, params)
-        //} catch (err) {
-        //    console.log(err.stack)
-            // res.json()
-        //}
-        //console.log(results.rows[0])
-        //res.status(200).json(results.rows)
-        res.status(200).json(1)
+        try {
+            let params = [req.body.instrumentName, req.body.country, req.body.sector, req.body.instrumentType, req.body.instrumentCurrency, req.body.isTradeable, req.body.notes || null]
+            const results = await pool.query(query, params)
+            res.status(200).json(results.row)
+        } catch (err) {
+            console.log(err.stack)
+            res.status(500)
+        }
     }
 
     static async GetInstrumentById(req, res, next){
