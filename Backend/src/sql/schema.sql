@@ -4,20 +4,21 @@ CREATE SCHEMA public;
 
 -- Instruments
 
-CREATE TYPE InstrumentType AS ENUM ('Private Equity', 'Real Estate');
-CREATE TYPE SectorType AS ENUM ('Consumer Staples', 'Information Technology', 'Healthcare', 'Industrials', 'Energy', 'Financials', 'Communication Services', 'Real Estate');
+-- CREATE TYPE InstrumentType AS ENUM ('Private Equity', 'Real Estate');
+-- CREATE TYPE SectorType AS ENUM ('Consumer Staples', 'Information Technology', 'Healthcare', 'Industrials', 'Energy', 'Financials', 'Communication Services', 'Real Estate');
 
 CREATE TABLE Instruments(
     instrument_id INTEGER PRIMARY KEY,
     instrument_name TEXT NOT NULL,
-    instrument_type InstrumentType NOT NULL, 
-    sector SectorType NOT NULL,
+    instrument_type TEXT NOT NULL, 
+    sector TEXT NOT NULL,
     country TEXT,
     currency TEXT,
     isTradeable BOOLEAN,
     created_time TIMESTAMP,
     modified_time TIMESTAMP,
-    notes TEXT
+    notes TEXT,
+    isDeleted BOOLEAN DEFAULT FALSE
 );
 
 -- Market Values
