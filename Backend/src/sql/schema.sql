@@ -49,3 +49,18 @@ CREATE TABLE Transactions(
     tranaction_type TransactionType NOT NULL,
     FOREIGN KEY(instrument_id) references Instruments(instrument_id)
 );
+
+COPY Instruments
+FROM '/tmp/instruments.csv'
+DELIMITER ','
+CSV HEADER;
+
+COPY MarketValues
+FROM '/tmp/market-values.csv'
+DELIMITER ','
+CSV HEADER;
+
+COPY Transactions
+FROM '/tmp/transactions.csv'
+DELIMITER ','
+CSV HEADER;
