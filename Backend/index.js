@@ -3,6 +3,7 @@ import bodyParser from 'body-parser'
 import dotenv from "dotenv"
 import pg from 'pg'
 
+import devtools from './src/routes/devtools.route.js'
 import instruments from './src/routes/instruments.route.js'
 import valuations from './src/routes/valuations.route.js'
 //import transactions from './src/routes/transactions.route.js'
@@ -39,6 +40,7 @@ app.use(function(req, res, next) {
 app.get('/', (request, response) => {response.json({info: 'Node.js, Express, Postgres API'})})
 
 //app.use('/test', tests)
+app.use('/dev', devtools)
 app.use('/api/instruments', instruments)
 app.use('/api/market-values', valuations)
 //app.use('/api/transactions', transactions)
