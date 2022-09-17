@@ -89,12 +89,12 @@ export default class TransactionsCtrl {
     console.log('---> AddTransaction end');
   }
 
-  static async CancelTransaction(req, res, next) {
+  static async DeleteTransaction(req, res, next) {
     console.log('---> CancelTransaction start');
     let transactionId = req.params.id;
     let params = [transactionId];
     let query =
-      'UPDATE transactions SET isCancelled = true modified_time = CURRENT_TIMESTAMP(0) WHERE transaction_id = $1';
+      'UPDATE transactions SET isCancelled = true, modified_time = CURRENT_TIMESTAMP(0) WHERE transaction_id = $1';
 
     try {
       const results = await pool.query(query, params);
