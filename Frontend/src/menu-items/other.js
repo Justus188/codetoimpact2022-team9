@@ -35,6 +35,14 @@ const other = {
             breadcrumbs: false
         },
         {
+            id:'instruments-page-selected',
+            title: 'Instruments Selected',
+            type: 'item',
+            url: '/instruments-page-selected',
+            icon: icons.IconBrandChrome,
+            breadcrumbs: false
+        },
+        {
             id: 'documentation',
             title: 'Documentation',
             type: 'item',
