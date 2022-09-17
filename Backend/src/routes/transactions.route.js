@@ -8,7 +8,7 @@ router.route("/").get(TransactionsCtrl.GetTransactionsSummary)
 router.route("/").post(TransactionsCtrl.AddTransaction)
 router.route("/:id")
     .get(TransactionsCtrl.GetTransactionById)
-    .post(TransactionsCtrl.CancelTransaction)
+    .delete(TransactionsCtrl.DeleteTransaction)
 
 router.route("/by_instrument/:id").get(TransactionsCtrl.GetTransactionByInstrumentId)
 export default router

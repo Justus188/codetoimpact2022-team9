@@ -16,6 +16,7 @@ export default class TransactionsCtrl {
         try {
             const results = await pool.query(query)
             res.status(200).json(results.rows)
+            console.log(results)
         } catch (err) {
             console.log(err.stack)
             res.status(500)
@@ -80,8 +81,8 @@ export default class TransactionsCtrl {
         console.log("---> AddTransaction end")   
     }
     
-    static async CancelTransaction(req, res, next) {
-        console.log("---> CancelTransaction start")
+    static async DeleteTransaction(req, res, next) {
+        console.log("---> DeleteTransaction start")
         let transactionId = req.params.id
         let params = [transactionId]
         let query = "UPDATE transactions SET isCancelled = true WHERE  transaction_id = $1"
@@ -93,7 +94,7 @@ export default class TransactionsCtrl {
             console.log(err.stack)
             res.status(500)
         }
-        console.log("---> CancelTransaction end")   
+        console.log("---> DeleteTransaction end")   
     }
 
 }
