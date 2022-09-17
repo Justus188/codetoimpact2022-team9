@@ -7,6 +7,9 @@ import Loadable from 'ui-component/Loadable';
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
 
+//GIC routing
+const InstrumentsDefault = Loadable(lazy(() => import('views/instruments/Default')));
+
 // utilities routing
 const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
 const UtilsColor = Loadable(lazy(() => import('views/utilities/Color')));
@@ -84,6 +87,10 @@ const MainRoutes = {
         {
             path: 'sample-page',
             element: <SamplePage />
+        },
+        {
+            path: 'instruments-page',
+            element: <InstrumentsDefault />
         }
     ]
 };
