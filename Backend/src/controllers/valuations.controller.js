@@ -1,5 +1,3 @@
-import pool from '../db/querypooler.js'
-
 export default class ValuationsController {
     static async AddMarketValues(req, res, next){
         let query = "INSERT INTO valuations (instrumentId, marketValue, marketValueDate) VALUES "

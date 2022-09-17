@@ -1,14 +1,22 @@
-import pool from '../db/querypooler.js'
+import pg from 'pg'
 
-export default class TnstrumentsController {
+export default class InstrumentsController {
     static async GetInstrumentsSummary(req, res, next){
+        var pool = new pg.Pool({
+            user: process.env.POSTGRES_USER,
+            host: process.env.POSTGRES_HOST,
+            database: process.env.POSTGRES_DATABASE,
+            password: process.env.POSTGRES_PASSWORD,
+            port: process.env.POSTGRES_PORT
+        })
+
         let query = "SELECT * FROM instruments WHERE isDeleted = false" // DECIDE ON COLUMNS!!
-        //try {
-        //    const results = await pool.query(query, params)
-        //} catch (err) {
-        //    console.log(err.stack)
+        try {
+            const results = await pool.query(query)
+        } catch (err) {
+            console.log(err.stack)
             // res.json()
-        //}
+        }
 
         //console.log(results.rows[0])
         //res.status(200).json(results.rows)

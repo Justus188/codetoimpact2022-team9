@@ -1,13 +1,27 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import dotenv from "dotenv"
+import pg from 'pg'
 
 import instruments from './src/routes/instruments.route.js'
 import valuations from './src/routes/valuations.route.js'
 //import transactions from './src/routes/transactions.route.js'
 //import investments from './src/routes/investments.route.js'
+//import tests from './tests.js'
 
 dotenv.config()
+
+let pool = new pg.Pool({
+    user: process.env.POSTGRES_USER,
+    host: process.env.POSTGRES_HOST,
+    database: process.env.POSTGRES_DATABASE,
+    password: process.env.POSTGRES_PASSWORD,
+    port: process.env.POSTGRES_PORT
+})
+
+//console.log(pool.query("SELECT * FROM instruments", (err, res) =>{
+//    console.log(err, res)
+//}))
 
 const app = express()
 const port = process.env.PORT || 5001
@@ -24,6 +38,7 @@ app.use(function(req, res, next) {
 
 app.get('/', (request, response) => {response.json({info: 'Node.js, Express, Postgres API'})})
 
+//app.use('/test', tests)
 app.use('/api/instruments', instruments)
 app.use('/api/market-values', valuations)
 //app.use('/api/transactions', transactions)
