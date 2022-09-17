@@ -12,7 +12,11 @@ export default class InvestmentsCtrl {
         let query = "SELECT * FROM investment WHERE instrumentId = $1"
         try {
             const results = await pool.query(query, params)
-            res.status(200).json(results.rows)
+            if (results.rowCount == 0) {
+                res.status(204).json("No rows returned")
+            } else{
+                res.status(200).json(results.rows)
+            }
         } catch (err) {
             console.log(err.stack)
             res.status(500)
