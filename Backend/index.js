@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.get('/', (request, response) => {response.json({info: 'Node.js, Express, Postgres API'})})
 
 app.use('/api/instruments', instruments)
-//app.use('/api/valuations', valuations)
+//app.use('/api/market-values', valuations)
 //app.use('/api/transactions', transactions)
 //app.use('/api/investments', investments)
 //app.use('/api/analytics', analytics)
