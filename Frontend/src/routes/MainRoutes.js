@@ -9,7 +9,6 @@ const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')))
 
 //GIC routing
 const InstrumentsDefault = Loadable(lazy(() => import('views/instruments/Default')));
-const MarketValuationsDefault = Loadable(lazy(() => import('views/market-valuations/Default')));
 const InstrumentsSelected = Loadable(lazy(() => import('views/instruments/Selected')));
 
 // utilities routing
@@ -93,10 +92,6 @@ const MainRoutes = {
         {
             path: 'instruments-page',
             element: <InstrumentsDefault />
-        },
-        {
-            path: 'market-valuations-page',
-            element: <MarketValuationsDefault />
         },
         {
             path: 'instruments-page-selected', // Should have id here
