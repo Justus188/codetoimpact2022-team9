@@ -56,6 +56,11 @@ const HomePageHeader = () => {
   return (
     <header className="header">
       <h2>Your instrument Tracker</h2>
+      <div className="d-flex justify-end">
+            <Button type="submit">
+              Add
+            </Button>
+          </div>
 
     </header>
   );

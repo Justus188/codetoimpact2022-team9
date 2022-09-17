@@ -4,12 +4,14 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-// import "./InstrumentForm.css";
-// import {
-//   addInstrumentAsyn,
-// } from "../../store/Instrument";
+import "./InstrumentForm.css";
+import {
+  addInstrumentAsyn,
+  deleteInstrumentAsyn,
+  editInstrumentAsyn,
+} from "../../store/Instrument";
 
-const TransactionForm = (props) => {
+const InstrumentForm = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -18,7 +20,7 @@ const TransactionForm = (props) => {
     formState: { errors },
   } = useForm();
 
-  const [enteredId, setEnteredID] = useState(props.id);
+  // const [enteredId, setEnteredID] = useState(props.id);
   const [enteredName, setEnteredName] = useState(props.name);
   const [enteredType, setEnteredType] = useState(props.type);
   const [enteredSector, setEnteredSector] = useState(props.sector);
@@ -29,9 +31,9 @@ const TransactionForm = (props) => {
 
   const [action, setAction] = useState(props.action);
 
-  const idChangeHandler = (event) => {
-    setEnteredID(event.target.value);
-  };
+  // const idChangeHandler = (event) => {
+  //   setEnteredID(event.target.value);
+  // };
 
   const nameChangeHandler = (event) => {
     setEnteredName(event.target.value);
@@ -64,114 +66,124 @@ const TransactionForm = (props) => {
   const onSubmit = (event) => {
     // event.preventDefault();
 
-    const transaction = {
+    const instrument = {
       notes: enteredNote,
       type: enteredType,
       name: enteredName,
-      date: enteredDate,
-      id: enteredId,
+      // id: enteredId,
       sector: enteredSector,
-      Country: enteredCountry,
+      country: enteredCountry,
       currency: enteredCurrency,
       tradable: enteredTradable,
     };
 
     // TODO: Add in the following handlers
     if (action === "add") {
-      dispatch(addTransactionAsyn(transaction));
+      dispatch(addInstrumentAsyn(instrument));
     } else if (action === "edit") {
-      dispatch(editTransactionAsyn(transaction));
+      dispatch(editInstrumentAsyn(instrument));
     }
     navigate(-1);
   };
 
   const deleteHandler = () => {
     setAction("delete");
-    dispatch(deleteTransactionAsyn(props.id));
+    dispatch(deleteInstrumentAsyn(props.id));
   };
 
   // 5 Input Field - Type, Date, Category, Amount and Note
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {props.action === "add" ? (
-        <h1 className="new-transaction__h1">Add Transaction</h1>
+        <h1 className="new-instrument__h1">Add Instrument</h1>
       ) : (
-        <h1 className="new-transaction__h1">Edit Transaction</h1>
+        <h1 className="new-instrument__h1">Edit Instrument</h1>
       )}
-      <div className="new-transaction__controls">
-        <div className="new-transaction__control">
-          <div className="new-transaction__actions">
+      <div className="new-instrument__controls">
+        <div className="new-instrument__control">
+          <div className="new-instrument__actions">
             <Button
-              variant={enteredType === "income" ? "contained" : "outlined"}
-              value="income"
+              variant={enteredType === "Private Equity" ? "contained" : "outlined"}
+              value="Private Equity"
               onClick={typeChangeHandler}
             >
-              Income
+              Private Equity
             </Button>
             <Button
-              variant={enteredType === "expense" ? "contained" : "outlined"}
-              value="expense"
+              variant={enteredType === "Real Estate" ? "contained" : "outlined"}
+              value="Real Estate"
               onClick={typeChangeHandler}
             >
-              Expense
+              Real Estate
             </Button>
           </div>
         </div>
 
-        <div className="new-transaction__control">
-          <label>Date</label>
+        <div className="new-instrument__control">
+          <label>Instrument Name</label>
           <input
-            type="date"
-            value={enteredDate}
-            min="2022-01-01"
-            max="2050-12-31"
-            onChange={dateChangeHandler}
+            type="text"
+            value={enteredName}
+
+            onChange={nameChangeHandler}
           />
         </div>
-        <div className="new-transaction__control">
-          <label>Category</label>
-          <div className="new-transaction__actions">
-            {enteredType === "income" ? (
+        <div className="new-instrument__control">
+          <label>Sector</label>
+          <div className="new-instrument__actions">
+            {enteredType === "Private Equity" ? (
               <select
-                value={enteredCategory}
-                {...register("category", { required: true })}
-                onChange={categoryChangeHandler}
+                value={enteredSector}
+                {...register("sector", { required: true })}
+                onChange={sectorChangeHandler}
               >
-                <option value="salary">Salary</option>
-                <option value="allowance">Allowance</option>
-                <option value="bonus">Bonus</option>
-                <option value="pettycash">Petty cash</option>
-                <option value="other">Other</option>
+                <option value="Communication Services">Communication Services</option>
+                <option value="Consumer Staples">Consumer Staples</option>
+                <option value="Energy">Energy</option>
+                <option value="Financials">Financials</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Industrials">Industrials</option>
+                <option value="Information Technology">Information Technology</option>
               </select>
             ) : (
               <select
-                value={enteredCategory}
-                {...register("category", { required: true })}
-                onChange={categoryChangeHandler}
+                value={enteredSector}
+                {...register("sector", { required: true })}
+                onChange={sectorChangeHandler}
               >
-                <option value="food">Food</option>
-                <option value="transport">Transport</option>
-                <option value="apparel">Apparel</option>
-                <option value="social life">Social Life</option>
-                <option value="household">Household</option>
-                <option value="gift">Gift</option>
-                <option value="others">Other</option>
+                <option value="Real Estate">Real Estate</option>
               </select>
             )}
           </div>
         </div>
-        <div className="new-transaction__control">
-          <label>Amount</label>
+        <div className="new-instrument__control">
+          <label>Country</label>
           <input
-            type="number"
-            min="0.01"
-            step="0.01"
-            value={enteredAmount}
-            {...register("amount", { required: true })}
-            onChange={amountChangeHandler}
+            type="text"
+            value={enteredCountry}
+            {...register("country", { required: true })}
+            onChange={countryChangeHandler}
           />
         </div>
-        <div className="new-transaction__control">
+        <div className="new-instrument__control">
+          <label>Currency</label>
+          <input
+            type="text"
+            value={enteredCurrency}
+            {...register("currency", { required: true })}
+            onChange={currencyChangeHandler}
+          />
+        </div>
+        <div className="new-instrument__control">
+          <label>isTradable</label>
+          <input
+            type="text"
+            value={enteredTradable}
+            {...register("tradable", { required: true })}
+            onChange={tradableChangeHandler}
+          />
+        </div>
+        <div className="new-instrument__control">
           <label>Note</label>
           <input
             type="text"
@@ -181,7 +193,7 @@ const TransactionForm = (props) => {
           />
         </div>
         {props.action === "edit" ? (
-          <div className="new-transaction__actions">
+          <div className="new-instrument__actions">
             <Button type="submit" variant="contained">
               Save
             </Button>
@@ -190,17 +202,23 @@ const TransactionForm = (props) => {
             </Button>
           </div>
         ) : props.action === "add" ? (
-          <div className="new-transaction__actions">
+          <div className="new-instrument__actions">
             <Button type="submit" variant="contained">
               Add
             </Button>
           </div>
         ) : null}
-        {errors.category && (
-          <p className="error_message">Please select a category!</p>
+        {errors.sector && (
+          <p className="error_message">Please select a sector!</p>
         )}
-        {errors.amount && (
-          <p className="error_message">Please enter an amount!</p>
+        {errors.country && (
+          <p className="error_message">Please input a country!</p>
+        )}
+        {errors.currency && (
+          <p className="error_message">Please input a currency!</p>
+        )}
+        {errors.tradable && (
+          <p className="error_message">Please input if instrument is tradable!</p>
         )}
         {errors.note && (
           <p className="error_message">Please enter a description!</p>
@@ -210,4 +228,4 @@ const TransactionForm = (props) => {
   );
 };
 
-export default TransactionForm;
+export default InstrumentForm;
