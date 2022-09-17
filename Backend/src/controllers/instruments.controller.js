@@ -9,8 +9,7 @@ export default class RestaurantsController {
             console.log(err.stack)
             // res.json()
         }
-        //res.status(200).json(results.rows)
-        res.json({GetInstrumentsSummary: id})
+        res.status(200).json(results.rows)
     }
 
     static async AddInstrument(req, res, next){
@@ -24,8 +23,7 @@ export default class RestaurantsController {
             // res.json()
         }
 
-        //res.status(200).json(results.rows)
-        res.json({GetInstrumentById: id})
+        res.status(200).json(results.rows)
     }
 
     static async GetInstrumentById(req, res, next){
@@ -39,8 +37,7 @@ export default class RestaurantsController {
             // res.json()
         }
 
-        //res.status(200).json(results.rows)
-        res.json({GetInstrumentById: id})
+        res.status(200).json(results.rows)
     }
 
     static async EditInstrument(req, res, next){
@@ -53,8 +50,7 @@ export default class RestaurantsController {
             console.log(err.stack)
             // res.json()
         }
-        //res.status(200).json(results.rows)
-        res.json({EditInstrument: id})
+        res.status(200).json(results.rows)
     }
 
     static async SoftDeleteInstrument(req, res, next){
@@ -67,8 +63,7 @@ export default class RestaurantsController {
             console.log(err.stack)
             // res.json()
         }
-        //res.status(200).json(results.rows)
-        res.json({SoftDeleteInstrument: id})
+        res.status(200).json(results.rows)
     }
 
     static async GetCreated(req, res, next){
@@ -81,8 +76,7 @@ export default class RestaurantsController {
             console.log(err.stack)
             // res.json()
         }
-        //res.status(200).json(results.rows)
-        res.json({GetCreated: id})
+        res.status(200).json(results.rows)
     }
 
     static async GetModified(req, res, next){
@@ -95,8 +89,7 @@ export default class RestaurantsController {
             console.log(err.stack)
             // res.json()
         }
-        //res.status(200).json(results.rows)
-        res.json({GetModified: id})
+        res.status(200).json(results.rows)
     }
 
     static async EditTradeable(req, res, next){
@@ -109,8 +102,7 @@ export default class RestaurantsController {
             console.log(err.stack)
             // res.json()
         }
-        //res.status(200).json(results.rows)
-        res.json({EditTradeable: id})
+        res.status(200).json(results.rows)
     }
 
     static async EditCountry(req, res, next){
@@ -123,8 +115,7 @@ export default class RestaurantsController {
             console.log(err.stack)
             // res.json()
         }
-        //res.status(200).json(results.rows)
-        res.json({EditCountry: id})
+        res.status(200).json(results.rows)
     }
 
     static async EditSector(req, res, next){
@@ -137,8 +128,7 @@ export default class RestaurantsController {
             console.log(err.stack)
             // res.json()
         }
-        //res.status(200).json(results.rows)
-        res.json({EditSector: id})
+        res.status(200).json(results.rows)
     }
 
     static async EditNotes(req, res, next){
@@ -151,7 +141,6 @@ export default class RestaurantsController {
             console.log(err.stack)
             // res.json()
         }
-        //res.status(200).json(results.rows)
-        res.json({EditNotes: id})
+        res.status(200).json(results.rows)
     }
 }
