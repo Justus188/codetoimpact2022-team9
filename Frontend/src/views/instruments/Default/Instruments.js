@@ -66,9 +66,9 @@ export default function DenseTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {dummyInstrumentData.map((data, key) => (
+            {dummyInstrumentData.map((data) => (
               <TableRow
-                key={key}
+                // key={key}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 {/* <TableCell component="th" scope="row">
@@ -80,7 +80,7 @@ export default function DenseTable() {
                 <TableCell align="right">{data.sector}</TableCell>
                 <TableCell align="right">{data.country}</TableCell>
                 <TableCell align="right">{data.instrumentCurrency}</TableCell>
-                <TableCell align="right">{data.isTradeable}</TableCell>
+                <TableCell align="right">{data.isTradeable.toString()}</TableCell>
                 <TableCell align="right">{data.createdAt}</TableCell>
                 <TableCell align="right">{data.modifiedAt}</TableCell>
                 <TableCell align="right">{data.notes}</TableCell>
