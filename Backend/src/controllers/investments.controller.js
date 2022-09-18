@@ -22,7 +22,7 @@ export default class InvestmentsCtrl {
             return
         }
         let params = [instrumentId]
-        let query = "SELECT  FROM investment WHERE instrumentId = $1"
+        let query = "SELECT * FROM investment WHERE instrumentId = $1"
         try {
             const results = await pool.query(query, params)
             if (results.rowCount == 0) {
