@@ -27,10 +27,10 @@ const other = {
             breadcrumbs: false
         },
         {
-            id:'instruments-page-selected',
-            title: 'Instruments Selected',
+            id:'transactions-page',
+            title: 'Transactions',
             type: 'item',
-            url: '/instruments-page-selected',
+            url: '/transactions-page',
             icon: icons.IconBrandChrome,
             breadcrumbs: false
         },

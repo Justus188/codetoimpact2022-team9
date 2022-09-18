@@ -11,6 +11,8 @@ const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')))
 const InstrumentsDefault = Loadable(lazy(() => import('views/instruments/Default')));
 const InstrumentsSelected = Loadable(lazy(() => import('views/instruments/Selected')));
 
+const TransactionsView = Loadable(lazy(() => import('views/transactions')));
+
 // utilities routing
 const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
 const UtilsColor = Loadable(lazy(() => import('views/utilities/Color')));
@@ -96,6 +98,10 @@ const MainRoutes = {
         {
             path: 'instruments-page-selected', // Should have id here
             element: <InstrumentsSelected />
+        },
+        {
+            path: 'transactions-page',
+            element: <TransactionsView />
         }
 
     ]
