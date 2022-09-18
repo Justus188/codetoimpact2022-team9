@@ -25,11 +25,16 @@ export default class TransactionsCtrl {
         */
     }
     console.log('---> GetTransactionsSummary start');
-
+    
     let query = 'SELECT * FROM transactions ORDER BY transaction_id desc';
     try {
       const results = await pool.query(query);
-      res.status(200).json(results.rows);
+      if (results.rowCount == 0) {
+        res.status(204);
+      } else {
+        res.status(200);
+      }
+      res.json(results.rows);
     } catch (err) {
       console.log(err.stack);
       res.status(500);
@@ -41,12 +46,21 @@ export default class TransactionsCtrl {
   static async GetTransactionById(req, res, next) {
     console.log('---> GetTransactionById start');
 
-    let id = req.params.id;
-    let params = [req.params.id];
+    const id = Number(req.params.id)
+    if (id == null) {
+      res.status(422).json('Invalid id.')
+      return
+    }
+    let params = [id];
     let query = 'SELECT * FROM transactions WHERE transaction_id = $1';
     try {
       const results = await pool.query(query, params);
-      res.status(200).json(results.rows);
+      if (results.rowCount == 0) {
+        res.status(204);
+      } else {
+        res.status(200);
+      }
+      res.json(results.rows);
     } catch (err) {
       console.log(err.stack);
       res.status(500);
@@ -58,12 +72,20 @@ export default class TransactionsCtrl {
   static async GetTransactionByInstrumentId(req, res, next) {
     console.log('---> GetTransactionByInstrumentId start');
 
-    let id = req.params.id;
+    const id = Number(req.params.id)
+    if (id == null) {
+      res.status(422).json('Invalid id.')
+    }
     let params = [req.params.id];
     let query = 'SELECT * FROM transactions WHERE instrument_id = $1';
     try {
       const results = await pool.query(query, params);
-      res.status(200).json(results.rows);
+      if (results.rowCount == 0) {
+        res.status(204);
+      } else {
+        res.status(200);
+      }
+      res.json(results.rows);
     } catch (err) {
       console.log(err.stack);
       res.status(500);
@@ -93,7 +115,12 @@ export default class TransactionsCtrl {
         req.body.transactionDate,
       ];
       const results = await pool.query(query, params);
-      res.status(200).json(results.rows);
+      if (results.rowCount == 0) {
+        res.status(204);
+      } else {
+        res.status(200);
+      }
+      res.json(results.rows);
     } catch (err) {
       console.log(err.stack);
       res.status(500);
@@ -110,7 +137,12 @@ export default class TransactionsCtrl {
 
     try {
       const results = await pool.query(query, params);
-      res.status(200).json(results.rows);
+      if (results.rowCount == 0) {
+        res.status(204);
+      } else {
+        res.status(200);
+      }
+      res.json(results.rows);
     } catch (err) {
       console.log(err.stack);
       res.status(500);
