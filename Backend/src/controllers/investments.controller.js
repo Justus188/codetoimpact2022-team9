@@ -22,7 +22,7 @@ export default class InvestmentsCtrl {
             return
         }
         let params = [instrumentId]
-        let query = "SELECT * FROM investment WHERE instrumentId = $1"
+        let query = "SELECT  FROM investment WHERE instrumentId = $1"
         try {
             const results = await pool.query(query, params)
             if (results.rowCount == 0) {
@@ -55,8 +55,9 @@ export default class InvestmentsCtrl {
             res.status(500).json("Error with transactions")
         }
         try {
+            params.push(new Date())
             console.log(params)
-            let query = "INSERT INTO investment (instrumentid, cumulativequantity, cumulativetransactionamount, refreshdatetime) VALUES ($1, $2, $3, CURRENT_TIMESTAMP(0)) RETURNING investmentid"
+            let query = "INSERT INTO investment (instrumentid, cumulativequantity, cumulativetransactionamount, refreshdatetime) VALUES ($1, $2, $3, $4) RETURNING investmentid" // DATE USES UTC
             let results = await pool.query(query, params)
             if (results.rowCount == 0){
                 res.status(500).json("Insert failed.")
