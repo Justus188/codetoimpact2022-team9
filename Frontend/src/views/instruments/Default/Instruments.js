@@ -96,16 +96,16 @@ const Instruments = () => {
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
           <TableHead>
             <TableRow>
-              <TableCell>instrumentId</TableCell>
-              <TableCell align="right">instrumentName</TableCell>
-              <TableCell align="right">instrumentType</TableCell>
-              <TableCell align="right">sector</TableCell>
+              <TableCell>Instrument Id</TableCell>
+              <TableCell align="right">Instrument Name</TableCell>
+              <TableCell align="right">Instrument Type</TableCell>
+              <TableCell align="right">Sector</TableCell>
               <TableCell align="right">country</TableCell>
-              <TableCell align="right">instrumentCurrency</TableCell>
-              <TableCell align="right">isTradeable</TableCell>
+              <TableCell align="right">Instrument Currency</TableCell>
+              <TableCell align="right">Is Tradeable?</TableCell>
               {/* <TableCell align="right">createdAt</TableCell>
                 <TableCell align="right">modifiedAt</TableCell> */}
-              <TableCell align="right">notes</TableCell>
+              <TableCell align="right">Notes</TableCell>
               <TableCell align="right">Link to more info</TableCell>
             </TableRow>
           </TableHead>
