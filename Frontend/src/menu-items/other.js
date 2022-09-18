@@ -27,14 +27,6 @@ const other = {
             breadcrumbs: false
         },
         {
-            id:'market-valuations-page',
-            title: 'Market Valuations',
-            type: 'item',
-            url: '/market-valuations-page',
-            icon: icons.IconBrandChrome,
-            breadcrumbs: false
-        },
-        {
             id:'instruments-page-selected',
             title: 'Instruments Selected',
             type: 'item',

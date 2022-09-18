@@ -55,12 +55,15 @@ var isLoaded = false;
 const HomePageHeader = () => {
   return (
     <header className="header">
-      <h2>Your instrument Tracker</h2>
-      <div className="d-flex justify-end">
-            <Button type="submit">
-              Add
-            </Button>
-          </div>
+      <h2>Your Instrument Tracker</h2>
+      <div style={{ display: "flex" }}>
+        <Button
+          type="submit"
+          style={{ marginLeft: "auto" }}
+        >
+          Add
+        </Button>
+      </div>
 
     </header>
   );

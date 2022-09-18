@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import "./InstrumentForm.css";
-import {
-  addInstrumentAsyn,
-  deleteInstrumentAsyn,
-  editInstrumentAsyn,
-} from "../../store/Instrument";
+// import {
+//   addInstrumentAsyn,
+//   deleteInstrumentAsyn,
+//   editInstrumentAsyn,
+// } from "../../store/Instrument";
 
-const InstrumentForm = (props) => {
+export const InstrumentForm = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -77,18 +77,19 @@ const InstrumentForm = (props) => {
       tradable: enteredTradable,
     };
 
-    // TODO: Add in the following handlers
-    if (action === "add") {
-      dispatch(addInstrumentAsyn(instrument));
-    } else if (action === "edit") {
-      dispatch(editInstrumentAsyn(instrument));
-    }
-    navigate(-1);
+    // // TODO: Add in the following handlers
+    // if (action === "add") {
+    //   dispatch(addInstrumentAsyn(instrument));
+    // } else if (action === "edit") {
+    //   dispatch(editInstrumentAsyn(instrument));
+    // }
+    // navigate(-1);
   };
 
   const deleteHandler = () => {
-    setAction("delete");
-    dispatch(deleteInstrumentAsyn(props.id));
+    // setAction("delete");
+    // dispatch(deleteInstrumentAsyn(props.id));
+    return
   };
 
   // 5 Input Field - Type, Date, Category, Amount and Note
