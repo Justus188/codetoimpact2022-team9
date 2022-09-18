@@ -92,13 +92,12 @@ export const InstrumentForm = (props) => {
     return
   };
 
-  // 5 Input Field - Type, Date, Category, Amount and Note
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {props.action === "add" ? (
-        <h1 className="new-instrument__h1">Add Instrument</h1>
-      ) : (
+      {props.action === "edit" ? (
         <h1 className="new-instrument__h1">Edit Instrument</h1>
+      ) : (
+        <h1 className="new-instrument__h1">Add Instrument</h1>
       )}
       <div className="new-instrument__controls">
         <div className="new-instrument__control">

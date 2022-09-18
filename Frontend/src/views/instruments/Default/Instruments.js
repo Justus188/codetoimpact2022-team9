@@ -3,7 +3,7 @@
 import { dummyInstrumentData } from "./DummyInstrumentData";
 import {getInstrumentsAsyn} from "../../../store/Instrument";
 
-import * as React from 'react';
+import React from 'react';
 import Button from '@mui/material/Button';
 
 import { useNavigate } from "react-router-dom";
@@ -16,6 +16,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useEffect, useState } from "react";
+import { component } from 'react';
+import { InstrumentForm } from './NewInstrument/InstrumentForm';
+
 
 export const Instruments = () => {
   return (
@@ -53,21 +56,29 @@ var isLoaded = false;
 // console.log(dummyInstrumentData)
 
 const HomePageHeader = () => {
+  const [open, setIsOpen] = React.useState(false);
+  const InstrumentForm = () => setIsOpen(true);
   return (
     <header className="header">
       <h2>Your Instrument Tracker</h2>
+
+
       <div style={{ display: "flex" }}>
         <Button
           type="submit"
           style={{ marginLeft: "auto" }}
+          onClick = {InstrumentForm}
         >
           Add
         </Button>
       </div>
+      {/* <TableCell align="right"><Button onClick={routeChange}>More Info</Button></TableCell> */}
 
     </header>
   );
 };
+
+
 
 // const MarketValuationTimeSeries = ({ isLoading }) => {
 //   return (
@@ -94,9 +105,13 @@ export default function DenseTable() {
 
 
    let navigate = useNavigate();
-   const routeChange = () => {
+   const routeChange = (data) => {
     let path = '../instruments-page-selected';
-    navigate(path);
+    navigate(
+      path, {
+        state: data
+      }
+      );
    }
 
    function Getid(id){
@@ -160,7 +175,7 @@ export default function DenseTable() {
               <TableCell align="right">{data.notes}</TableCell>
               {/* <TableCell align="right"><Button onClick={()=> {Getid(data.instrument_id)}}>More Info</Button></TableCell> */}
 
-              <TableCell align="right"><Button onClick={routeChange}>More Info</Button></TableCell>
+              <TableCell align="right"><Button onClick={() => {routeChange(data)}}>More Info</Button></TableCell>
               {/* <TableCell align="right"><Button onClick={()=> {handleClick(data.instrument_id)}}>More Info</Button></TableCell> */}
 
             </TableRow>
