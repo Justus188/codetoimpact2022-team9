@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 // material-ui
-import { Grid, Modal } from '@mui/material';
+import { Divider, Grid, Modal } from '@mui/material';
 
 // project imports
 import InstrumentMetaDataCard from './InstrumentMetaDataCard';
@@ -92,34 +92,46 @@ const Dashboard = () => {
             </Modal>
 
             <Grid container spacing={gridSpacing}>
-                <Grid item xs={12}>
-                    <Grid container spacing={gridSpacing}>
-                        <Grid item lg={4} md={6} sm={6} xs={12}>
-                            <InstrumentMetaDataCard
-                                isLoading={isLoading}
-                                instrumentName={instrumentName}
-                                country={country}
-                                instrumentCurrency={instrumentCurrency}
-                                openEditModal={openModal}
-                            />
+                <Grid item xs={4}>
+                    <Grid item xs={12}>
+                        <Grid container spacing={gridSpacing} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                            <Grid item sm={6} xs={12} md={6} lg={12}>
+                                <InstrumentMetaDataCard
+                                    isLoading={isLoading}
+                                    instrumentName={instrumentName}
+                                    country={country}
+                                    instrumentCurrency={instrumentCurrency}
+                                    openEditModal={openModal}
+                                />
+                            </Grid>
                         </Grid>
-                        <Grid item lg={4} md={6} sm={6} xs={12}>
-                            <InstrumentTradingInfoCard
-                                isLoading={isLoading}
-                                instrumentType={instrumentType}
-                                sector={sector}
-                                country={country}
-                            />
+                        <Divider></Divider>
+                        <Divider></Divider>
+                        <Divider></Divider>
+                        <Divider></Divider>
+                        <Divider></Divider>
+                        <Grid container spacing={gridSpacing} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                            <Grid item sm={6} xs={12} md={6} lg={12}>
+                                <InstrumentTradingInfoCard
+                                    isLoading={isLoading}
+                                    instrumentType={instrumentType}
+                                    sector={sector}
+                                    country={country}
+                                />
+                            </Grid>
                         </Grid>
-                        <Grid item lg={4} md={12} sm={12} xs={12}>
-                            <Grid container spacing={gridSpacing}>
-                                <Grid item sm={6} xs={12} md={6} lg={12}>
-                                    <InstrumentNotesCard isLoading={isLoading} notes={notes} />
-                                </Grid>
+                        <Divider></Divider>
+                        <Divider></Divider>
+                        <Divider></Divider>
+                        <Divider></Divider>
+                        <Divider></Divider>
+                        <Grid container spacing={10} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                            <Grid item sm={6} xs={12} md={6} lg={12}>
+                                <InstrumentNotesCard isLoading={isLoading} notes={notes} />
+                            </Grid>
                                 {/* <Grid item sm={6} xs={12} md={6} lg={12}>
                                     <TotalIncomeLightCard isLoading={isLoading} />
                                 </Grid> */}
-                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -134,11 +146,13 @@ const Dashboard = () => {
                         </Grid>
                     </Grid>
                 </Grid> */}
-                            <Grid container spacing={gridSpacing}>
-                <Grid item lg={10} md={10} sm={10} xs={10}>
-                    <MarketValuationTimeSeries isLoading={isLoading} />
+                <Grid item xs={8}>
+                    <Grid container spacing={gridSpacing}>
+                        <Grid item lg={12} md={12} sm={12} xs={12}>
+                            <MarketValuationTimeSeries isLoading={isLoading} />
+                        </Grid>
+                    </Grid>
                 </Grid>
-            </Grid>
             </Grid>
         </>
     );
