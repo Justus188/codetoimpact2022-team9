@@ -53,9 +53,12 @@ var isLoaded = false;
 // console.log(dummyInstrumentData)
 
 const HomePageHeader = () => {
+  
   return (
     <header className="header">
       <h2>Your Instrument Tracker</h2>
+
+
       <div style={{ display: "flex" }}>
         <Button
           type="submit"
@@ -64,6 +67,7 @@ const HomePageHeader = () => {
           Add
         </Button>
       </div>
+      <TableCell align="right"><Button onClick={routeChange}>More Info</Button></TableCell>
 
     </header>
   );
@@ -94,9 +98,13 @@ export default function DenseTable() {
 
 
    let navigate = useNavigate();
-   const routeChange = () => {
+   const routeChange = (data) => {
     let path = '../instruments-page-selected';
-    navigate(path);
+    navigate(
+      path, {
+        instrumentData: data
+      }
+      );
    }
 
    function Getid(id){
@@ -160,7 +168,7 @@ export default function DenseTable() {
               <TableCell align="right">{data.notes}</TableCell>
               {/* <TableCell align="right"><Button onClick={()=> {Getid(data.instrument_id)}}>More Info</Button></TableCell> */}
 
-              <TableCell align="right"><Button onClick={routeChange}>More Info</Button></TableCell>
+              <TableCell align="right"><Button onClick={routeChange(data)}>More Info</Button></TableCell>
               {/* <TableCell align="right"><Button onClick={()=> {handleClick(data.instrument_id)}}>More Info</Button></TableCell> */}
 
             </TableRow>
