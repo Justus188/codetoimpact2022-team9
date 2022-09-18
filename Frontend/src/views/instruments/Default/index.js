@@ -13,7 +13,7 @@ import { Grid } from '@mui/material';
 import { gridSpacing } from 'store/constant';
 import { MarketValuationTimeSeries } from './MarketValuationTimeSeries';
 import { InstrumentForm } from './NewInstrument/InstrumentForm';
-import { Instruments } from "./Instruments";
+import Instruments from "./Instruments";
 
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
@@ -25,7 +25,6 @@ const Dashboard = () => {
 
     return (
         <div>
-            <InstrumentForm />
             {/* <Grid container spacing={gridSpacing}>
                 <Grid item lg={10} md={10} sm={10} xs={10}>
                     <MarketValuationTimeSeries isLoading={isLoading} />

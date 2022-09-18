@@ -11,7 +11,7 @@ import "./InstrumentForm.css";
 //   editInstrumentAsyn,
 // } from "../../store/Instrument";
 
-export const InstrumentForm = (props) => {
+export const InstrumentForm = ({ handleClose, ...props }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -94,11 +94,11 @@ export const InstrumentForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {props.action === "edit" ? (
+      {/* {props.action === "edit" ? (
         <h1 className="new-instrument__h1">Edit Instrument</h1>
-      ) : (
-        <h1 className="new-instrument__h1">Add Instrument</h1>
-      )}
+      ) : ( */}
+      <h1 className="new-instrument__h1">Add Instrument</h1>
+      {/* )} */}
       <div className="new-instrument__controls">
         <div className="new-instrument__control">
           <div className="new-instrument__actions">
@@ -192,22 +192,30 @@ export const InstrumentForm = (props) => {
             onChange={noteChangeHandler}
           />
         </div>
-        {props.action === "edit" ? (
-          <div className="new-instrument__actions">
-            <Button type="submit" variant="contained">
-              Save
-            </Button>
-            <Button type="submit" variant="contained" onClick={deleteHandler}>
-              Delete
-            </Button>
-          </div>
-        ) : props.action === "add" ? (
-          <div className="new-instrument__actions">
-            <Button type="submit" variant="contained">
-              Add
-            </Button>
-          </div>
-        ) : null}
+        <div className="new-instrument__actions">
+          <Button
+            disableElevation
+            fullWidth
+            size="large"
+            type="submit"
+            variant="contained"
+            color="success"
+          >
+            Submit
+          </Button>
+          <Button
+            disableElevation
+            fullWidth
+            size="large"
+            type="button"
+            variant="contained"
+            color="error"
+            onClick={handleClose}
+          >
+            Cancel
+          </Button>
+        </div>
+
         {errors.sector && (
           <p className="error_message">Please select a sector!</p>
         )}
