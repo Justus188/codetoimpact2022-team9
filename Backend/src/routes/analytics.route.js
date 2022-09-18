@@ -4,7 +4,7 @@ import AnalyticsCtrl from "../controllers/analytics.controller.js" // db control
 
 const router = express.Router()
 
-router.route("/market-value/breakdown").get(AnalyticsCtrl.GetMarketValueBreakdown)
+router.route("/market-value/breakdown").get(AnalyticsCtrl.TestEndpoint)
 router.route("/market-value/date").get(AnalyticsCtrl.GetMarketValueDate)
 router.route("/profit/breakdown").get(AnalyticsCtrl.GetProfitBreakdown)
 router.route("/profit/date").get(AnalyticsCtrl.GetProfitDate)

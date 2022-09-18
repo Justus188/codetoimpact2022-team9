@@ -6,18 +6,15 @@ export default class AnalyticsCtrl {
         res.json("Hello World")
     }
 
-    static async CalcProfit(req, res, next){
-
-    }
-
     static async GetMarketValueBreakdown(req, res, next) {
         try {
-            let query = "SELECT instrument_id, -SUM(transaction_amount) AS total_mkt_value FROM transactions GROUP BY instrument_id"
-            let result = pool.query(query)
+            let query = "SELECT instrument_id, SUM(transactions.quantity) AS qty, t_mkt_vals.market_value AS mkt_val FROM transactions WHERE isCancelled = false GROUP BY instrument_id JOIN (SELECT DISTINCT ON instrument_id, market_value_date, market_value FROM marketvalues ORDER BY instrument_id, market_value_date DESC AS t_mkt_vals) ON transactions.instrument_id = t_mkt_vals.instrument_id"
+            let result = await pool.query(query)
             console.log(result)
             res.status(200)
         } catch (err) {
-            res.status(500).json("Error retrieving instruments transacted.")
+            console.log(err.stack)
+            res.status(500)
         }
     }
 
@@ -43,3 +40,4 @@ export default class AnalyticsCtrl {
         // ROI = Profit / Original Price
     }
 }
+
