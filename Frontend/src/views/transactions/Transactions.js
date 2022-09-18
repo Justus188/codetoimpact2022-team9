@@ -60,7 +60,15 @@ const HomePageHeader = () => {
   return (
     <header className="header">
       <h2>Your Transactions Tracker</h2>
-
+      <div className="new-itransaction__control">
+          <label>Search instrument id </label>
+          <input
+            type="number"
+            // value={enteredCurrency}
+            // {...register("currency", { required: true })}
+            // onChange={currencyChangeHandler}
+          />
+        </div>
       <div style={{ display: "flex" }}>
         <Button
           type="submit"
