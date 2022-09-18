@@ -12,9 +12,10 @@ export default class AnalyticsCtrl {
 
     static async GetMarketValueBreakdown(req, res, next) {
         try {
-            let query = "SELECT instrument_id, total_mkt_value, total_mkt_value / SUM(total_mkt_value) AS share FROM (SELECT instrument_id, -SUM(transaction_amount) AS total_mkt_value FROM transactions GROUP BY instrument_id AS temp_table)"
+            let query = "SELECT instrument_id, -SUM(transaction_amount) AS total_mkt_value FROM transactions GROUP BY instrument_id"
             let result = pool.query(query)
             console.log(result)
+            res.status(200)
         } catch (err) {
             res.status(500).json("Error retrieving instruments transacted.")
         }
