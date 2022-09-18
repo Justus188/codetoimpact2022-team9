@@ -107,7 +107,6 @@ export default class InstrumentsController {
   }
 
   static async GetInstrumentById(req, res, next) {
-    let id = req.params.id;
     let params = [req.params.id];
     let query =
       'SELECT * FROM instruments WHERE instrument_id = $1 AND isDeleted = false'; // DECIDE ON COLUMNS!!
@@ -147,10 +146,11 @@ export default class InstrumentsController {
       ];
       const results = await pool.query(query, params);
       if (results.rowCount == 0) {
-        res.status(204).json('No rows returned');
+        res.status(204)
       } else {
-        res.status(200).json(results.rows);
+        res.status(200)
       }
+      res.json(results.rows)
     } catch (err) {
       console.log(err.stack);
       res.json(500);
@@ -158,7 +158,6 @@ export default class InstrumentsController {
   }
 
   static async SoftDeleteInstrument(req, res, next) {
-    let id = req.params.id;
     let params = [req.params.id];
     console.log('SOFT delete');
     let query =
@@ -166,13 +165,14 @@ export default class InstrumentsController {
     try {
       const results = await pool.query(query, params);
       if (results.rowCount == 0) {
-        res.status(204).json('No rows returned');
+        res.status(204)
       } else {
-        res.status(200).json(results.rows);
+        res.status(200)
       }
+      res.json(results.rows)
     } catch (err) {
       console.log(err.stack);
-      res.status(500);
+      res.status(500).json(err);
     }
   }
 
@@ -182,13 +182,14 @@ export default class InstrumentsController {
     try {
       const results = await pool.query(query, params);
       if (results.rowCount == 0) {
-        res.status(204).json('No rows returned');
+        res.status(204)
       } else {
-        res.status(200).json(results.rows);
+        res.status(200)
       }
+      res.json(results.rows)
     } catch (err) {
       console.log(err.stack);
-      // res.json()
+      res.status(500).json(err)
     }
   }
 
@@ -199,13 +200,14 @@ export default class InstrumentsController {
     try {
       const results = await pool.query(query, params);
       if (results.rowCount == 0) {
-        res.status(204).json('No rows returned');
+        res.status(204)
       } else {
-        res.status(200).json(results.rows);
+        res.status(200)
       }
+      res.json(results.rows)
     } catch (err) {
       console.log(err.stack);
-      res.json(500).err;
+      res.status(500).json(err);
     }
   }
 
@@ -222,7 +224,7 @@ export default class InstrumentsController {
       }
     } catch (err) {
       console.log(err.stack);
-      res.json(500);
+      res.status(500).json(err);
     }
   }
 
