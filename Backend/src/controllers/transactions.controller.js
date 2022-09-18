@@ -1,6 +1,18 @@
-import pg from 'pg';
-
 export default class TransactionsCtrl {
+  static async TestEndpoint(req, res, next){
+    res.json("Hello World")
+  }
+  
+  static async GetAll(req, res, next){
+    try{
+      const results = await pool.query("SELECT * FROM transactions")
+      res.status(200).json(results.row)
+    } catch (err) {
+      console.log(err.stack);
+      res.status(500);
+    }
+  }
+
   static async GetTransactionsSummary(req, res, next) {
     {
       /*
