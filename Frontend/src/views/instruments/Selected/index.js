@@ -20,6 +20,8 @@ import { gridSpacing } from 'store/constant';
 import { mockInstrumentMetaData } from './chart-data/mock_instrument_meta_data';
 import { mockInstrumentChartData } from './chart-data/mock_instrument_chart_data';
 
+import { MarketValuationTimeSeries } from '../Default/MarketValuationTimeSeries';
+
 import { useLocation } from 'react-router';
 
 // ==============================|| DEFAULT DASHBOARD ||============================== //
@@ -132,6 +134,11 @@ const Dashboard = () => {
                         </Grid>
                     </Grid>
                 </Grid> */}
+                            <Grid container spacing={gridSpacing}>
+                <Grid item lg={10} md={10} sm={10} xs={10}>
+                    <MarketValuationTimeSeries isLoading={isLoading} />
+                </Grid>
+            </Grid>
             </Grid>
         </>
     );
