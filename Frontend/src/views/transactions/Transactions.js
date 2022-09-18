@@ -111,7 +111,7 @@ export default function DenseTable() {
             <TableCell align="right">transactionCurrency</TableCell>
             <TableCell align="right">transactionDate</TableCell>
             <TableCell align="right">quantity</TableCell>
-            <TableCell align="right">isCancelled</TableCell>
+            {/* <TableCell align="right">isCancelled</TableCell> */}
             {/* <TableCell align="right">createdAt</TableCell>
             <TableCell align="right">modifiedAt</TableCell> */}
             <TableCell align="right">transactiontype</TableCell>
