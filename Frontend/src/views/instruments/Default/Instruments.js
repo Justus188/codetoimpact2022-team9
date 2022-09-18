@@ -3,7 +3,7 @@
 import { dummyInstrumentData } from "./DummyInstrumentData";
 import {getInstrumentsAsyn} from "../../../store/Instrument";
 
-import * as React from 'react';
+import React from 'react';
 import Button from '@mui/material/Button';
 
 import { useNavigate } from "react-router-dom";
@@ -16,6 +16,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useEffect, useState } from "react";
+import { component } from 'react';
+import { InstrumentForm } from './NewInstrument/InstrumentForm';
+
 
 export const Instruments = () => {
   return (
@@ -53,7 +56,8 @@ var isLoaded = false;
 // console.log(dummyInstrumentData)
 
 const HomePageHeader = () => {
-  
+  const [open, setIsOpen] = React.useState(false);
+  const InstrumentForm = () => setIsOpen(true);
   return (
     <header className="header">
       <h2>Your Instrument Tracker</h2>
@@ -63,6 +67,7 @@ const HomePageHeader = () => {
         <Button
           type="submit"
           style={{ marginLeft: "auto" }}
+          onClick = {InstrumentForm}
         >
           Add
         </Button>
@@ -72,6 +77,8 @@ const HomePageHeader = () => {
     </header>
   );
 };
+
+
 
 // const MarketValuationTimeSeries = ({ isLoading }) => {
 //   return (
