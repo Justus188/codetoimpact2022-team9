@@ -67,7 +67,7 @@ const HomePageHeader = () => {
           Add
         </Button>
       </div>
-      <TableCell align="right"><Button onClick={routeChange}>More Info</Button></TableCell>
+      {/* <TableCell align="right"><Button onClick={routeChange}>More Info</Button></TableCell> */}
 
     </header>
   );
@@ -102,7 +102,7 @@ export default function DenseTable() {
     let path = '../instruments-page-selected';
     navigate(
       path, {
-        instrumentData: data
+        state: data
       }
       );
    }
@@ -168,7 +168,7 @@ export default function DenseTable() {
               <TableCell align="right">{data.notes}</TableCell>
               {/* <TableCell align="right"><Button onClick={()=> {Getid(data.instrument_id)}}>More Info</Button></TableCell> */}
 
-              <TableCell align="right"><Button onClick={routeChange(data)}>More Info</Button></TableCell>
+              <TableCell align="right"><Button onClick={() => {routeChange(data)}}>More Info</Button></TableCell>
               {/* <TableCell align="right"><Button onClick={()=> {handleClick(data.instrument_id)}}>More Info</Button></TableCell> */}
 
             </TableRow>
