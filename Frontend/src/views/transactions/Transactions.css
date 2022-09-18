@@ -1,0 +1,14 @@
+.new-transaction__controls {
+    gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 4rem auto;
+    width: 95%;
+    max-width: 40rem;
+    border-radius: 6px;
+    background-color: #f4f5f7ee;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+    text-align: center;
+    display: block;
+  }
