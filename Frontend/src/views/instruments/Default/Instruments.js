@@ -42,7 +42,7 @@ const Instruments = () => {
 
   useEffect(() => {
     const instrument = async () => {
-      const resp = await fetch(`http://localhost:5001/api/instruments`, {
+      const resp = await fetch(`http://18.142.178.20:5001/api/instruments`, {
         method: 'GET',
       });
       if (resp.ok) {

@@ -74,7 +74,7 @@ export const MarketValuationTimeSeries = ({ isLoading }) => {
 
     useEffect(() => {
         const marketvalue = async () => {
-            const resp = await fetch(`http://localhost:5001/api/market-values/152`, {
+            const resp = await fetch(`http://18.142.178.20:5001//api/market-values/152`, {
               method: 'GET',
             }); 
             if (resp.ok) {
